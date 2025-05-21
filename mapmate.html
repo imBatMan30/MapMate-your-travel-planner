@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map Mate</title>
+    <link rel="stylesheet" href="mapstyle.css">
+    <!-- Add Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="main">
+        <!-- Navigation start here -->
+        <div class="nav">
+            <div class="logo">
+                <img src="logo/logo.jpg" alt="Map Mate Logo" height="60">
+                <div class="text">
+                    <h1>Map Mate</h1>
+                    <p>Your Travel Planner</p>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!-- Navigation ends here -->
+
+        <!-- Main content of the page -->
+        <div class="center">
+            <div class="heading">
+                <h1>Tell us your travel preferences 🏕️🌴</h1>
+                <p>Just provide some basic information, and our trip planner will generate a customized itinerary based on your preferences.</p>
+            </div>
+            <!-- Error message container -->
+            <div id="error-message" class="error-message"></div>
+            <form action="/generate" method="post">
+                <div class="enteries">
+                    <div class="destination">
+                        <label class="lab" for="source">Enter the source city</label>
+                        <input type="text" class="src" id="source" name="source" required>
+                    </div>
+
+                    <div class="days">
+                        <label class="lab" for="days">How many days are you planning your trip?</label>
+                        <select name="days" id="days" class="entrii" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                        </select>
+                    </div>
+
+                    <div class="budget-section">
+                        <h2>What is Your Budget?</h2>
+                        <div class="budget-options">
+                            <label class="option">
+                                <img src="logo/cheap.jpg" alt="cheap">
+                                <input type="radio" name="budget" value="cheap" required>
+                                <h3>Cheap</h3>
+                                <p>stay conscious about the price</p>
+                            </label>
+                            <label class="option">
+                                <img src="logo/moneylogo.jpg" alt="moderate">
+                                <input type="radio" name="budget" value="moderate">
+                                <h3>Moderate</h3>
+                                <p>spend moderate amount</p>
+                            </label>
+                            <label class="option">
+                                <img src="logo/moneylogo3.png" alt="luxury">
+                                <input type="radio" name="budget" value="luxury">
+                                <h3>Luxury</h3>
+                                <p>don't care about price.</p>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="travel">
+                        <h2>Travel medium?</h2>
+                        <div class="travel-options">
+                            <label class="option">
+                                <img src="logo/publictransport.png" alt="public">
+                                <input type="radio" name="medium" value="public" required>
+                                <h3>Public transport</h3>
+                                <p>stay conscious about the price</p>
+                            </label>
+                            <label class="option">
+                                <img src="logo/privatetransport.png" alt="private">
+                                <input type="radio" name="medium" value="private">
+                                <h3>Private transport</h3>
+                                <p>spend moderate amount</p>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bttn">
+                    <button type="submit">Let's Go</button>
+                </div>
+            </form>
+        </div>
+        <footer>
+            <p>© 2025 MapMate Travel Planner. All rights reserved.</p>
+        </footer>
+    </div>
+    <script>
+        // Display welcome message if name is present
+        const params = new URLSearchParams(window.location.search);
+        const name = params.get('name');
+        if (name) {
+            alert(`Welcome, ${name}!`);
+        }
+
+        // Display error message if present
+        const error = params.get('error');
+        if (error) {
+            const errorDiv = document.getElementById('error-message');
+            errorDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${decodeURIComponent(error)}`;
+            errorDiv.style.display = 'block';
+        }
+
+        // Add click event to radio button labels to toggle selection
+        document.querySelectorAll('.option').forEach(label => {
+            label.addEventListener('click', () => {
+                const input = label.querySelector('input[type="radio"]');
+                if (input) {
+                    input.checked = true;
+                    // Update visual feedback
+                    label.parentElement.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+                    label.classList.add('selected');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

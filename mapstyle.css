@@ -1,0 +1,239 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body,
+html {
+  height: 100%;
+  width: 100%;
+  background: url(6345959.jpg) no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* Navigation bar styling */
+.nav {
+  background-color: whitesmoke;
+  height: 80px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 10px;
+}
+
+.logo img {
+  border-radius: 50%;
+}
+
+.logo .text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.text h1 {
+  color: black;
+}
+
+.text p {
+  margin-left: 9px;
+}
+
+/* Main content styling */
+.heading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 80px;
+}
+
+.heading p {
+  margin-top: 15px;
+  font-size: larger;
+}
+
+.enteries {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.destination,
+.days,
+.budget-section,
+.travel {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lab {
+  margin-top: 10px;
+  padding-top: 30px;
+  font-size: larger;
+}
+
+.destination .src {
+  width: 25%;
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  padding-left: 10px;
+  margin-top: 20px;
+}
+
+.entrii {
+  margin-top: 15px;
+  height: 40px;
+  width: 25%;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  padding-left: 10px;
+}
+
+.bttn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 25px;
+}
+
+.bttn button {
+  height: 45px;
+  width: 150px;
+  background-color: #003399;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.bttn button:hover {
+  background-color: #002266;
+}
+
+/* Error message styling */
+.error-message {
+  display: none;
+  color: #d32f2f;
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.error-message i {
+  margin-right: 5px;
+}
+
+/* Budget section */
+.budget-section {
+  padding: 30px;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.budget-section h2 {
+  font-weight: normal;
+  margin-bottom: 20px;
+  font-size: 19px;
+}
+
+.budget-options {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.option {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  width: 180px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s ease;
+  background-color: white;
+  position: relative;
+}
+
+.option:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transform: scale(1.02);
+}
+
+.option input[type="radio"] {
+  display: none;
+}
+
+.option.selected {
+  border: 2px solid #003399;
+  background-color: #e6f0ff;
+}
+
+.option.selected h3,
+.option.selected p {
+  color: #003399;
+}
+
+.option img {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 10px;
+}
+
+.option h3 {
+  font-weight: normal;
+  margin: 10px 0 5px;
+}
+
+.option p {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Travel section */
+.travel {
+  padding: 30px;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.travel h2 {
+  font-weight: normal;
+  margin-bottom: 20px;
+  font-size: 19px;
+}
+
+.travel-options {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+footer {
+  text-align: center;
+  padding: 1.5rem;
+  background-color: whitesmoke;
+  color: black;
+  margin-top: 2rem;
+}
