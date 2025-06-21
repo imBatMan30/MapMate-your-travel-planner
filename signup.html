@@ -1,48 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <title>Map mate login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MapMate - Sign Up</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
     <div class="container">
         <div class="left">
             <h1>Join MapMate</h1>
-            <h3>Your Ultimate Travel Planner</h3>
-            <p>Create an account to start planning your perfect trips. Discover new destinations, optimize your routes, and make unforgettable memories with MapMate.</p>
+            <h1>Community</h1>
+            <h3>Create Your Travel Planning Account</h3>
+            <p>Start your journey with intelligent travel planning. Discover curated destinations, optimize your routes, and create unforgettable memories with MapMate's sophisticated platform.</p>
             <div class="circle1"></div>
             <div class="circle2"></div>
         </div>
         <div class="right">
-            <h2 class="title">Create Account</h2>
-
-            <form action="/Signup" method="post">
+            <h2><i class="fas fa-user-plus"></i> Create Account</h2>
+            <p>Join thousands of travelers who trust MapMate for their adventures.</p>
+            
+            <div id="error-message" class="error-message" style="display: none;">
+                <i class="fas fa-exclamation-triangle"></i> <span id="error-text"></span>
+            </div>
+            
+            <div id="success-message" class="success-message" style="display: none;">
+                <i class="fas fa-check-circle"></i> <span id="success-text"></span>
+            </div>
+            
+            <form id="signup-form" action="/Signup" method="POST">
                 <div class="input-group">
-                    <label>Name</label>
-                    <input id="nm" type="text" name="name" placeholder="Enter your full name">
+                    <label for="name"><i class="fas fa-user"></i> Full Name</label>
+                    <input type="text" name="name" id="name" placeholder="Enter your full name" required>
                 </div>
-
                 <div class="input-group">
-                    <label>email</label>
-                    <input id="em" type="text" name="email" placeholder="Enter your email id">
+                    <label for="email"><i class="fas fa-envelope"></i> Email Address</label>
+                    <input type="email" name="email" id="email" placeholder="Enter your email address" required>
                 </div>
-
                 <div class="input-group">
-                    <label>Password</label>
-                    <input id="pas" type="password" name="password" placeholder="Enter your password">
+                    <label for="password"><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" name="password" id="password" placeholder="Create a secure password" required>
+                    <div class="password-strength">
+                        <div class="password-strength-bar" id="password-strength-bar"></div>
+                    </div>
                 </div>
-                
-                <button class="button">Sign up</button>
+                <div class="input-group">
+                    <label for="security-question"><i class="fas fa-shield-alt"></i> Security Question (Optional)</label>
+                    <select name="security_question" id="security-question">
+                        <option value="">Choose a security question (recommended)</option>
+                        <option value="pet_name">What was the name of your first pet?</option>
+                        <option value="birth_city">In which city were you born?</option>
+                        <option value="school_name">What was the name of your elementary school?</option>
+                        <option value="mother_maiden">What is your mother's maiden name?</option>
+                        <option value="first_car">What was the make of your first car?</option>
+                        <option value="favorite_book">What is your favorite book?</option>
+                        <option value="childhood_friend">What was the name of your childhood best friend?</option>
+                    </select>
+                </div>
+                <div class="input-group" id="security-answer-group" style="display: none;">
+                    <label for="security-answer"><i class="fas fa-key"></i> Security Answer</label>
+                    <input type="text" name="security_answer" id="security-answer" placeholder="Enter your answer">
+                </div>
+                <button type="submit" class="button">
+                    <i class="fas fa-user-plus"></i> Create Account
+                </button>
                 
                 <div class="signup">
-                    Already have an account? <a href="index.html">Login</a>
+                    Already have an account? <a href="index.html">Sign In</a>
                 </div>
             </form>
         </div>
     </div>
-</body>
 
+    <script>
+        // Show/hide security answer field based on security question selection
+        document.getElementById('security-question').addEventListener('change', function() {
+            const answerGroup = document.getElementById('security-answer-group');
+            const answerInput = document.getElementById('security-answer');
+            
+            if (this.value) {
+                answerGroup.style.display = 'block';
+                answerInput.required = true;
+            } else {
+                answerGroup.style.display = 'none';
+                answerInput.required = false;
+                answerInput.value = '';
+            }
+        });
+
+        // Password strength checker
+        document.getElementById('password').addEventListener('input', function() {
+            const password = this.value;
+            const strengthBar = document.getElementById('password-strength-bar');
+            
+            let strength = 0;
+            if (password.length >= 6) strength++;
+            if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strength++;
+            if (password.match(/[0-9]/)) strength++;
+            if (password.match(/[^a-zA-Z0-9]/)) strength++;
+            
+            strengthBar.className = 'password-strength-bar';
+            if (strength === 1) {
+                strengthBar.classList.add('weak');
+            } else if (strength === 2 || strength === 3) {
+                strengthBar.classList.add('medium');
+            } else if (strength >= 4) {
+                strengthBar.classList.add('strong');
+            }
+        });
+
+        // Form validation
+        document.getElementById('signup-form').addEventListener('submit', function(e) {
+            const emailInput = document.getElementById('email').value;
+            const passwordInput = document.getElementById('password').value;
+            const nameInput = document.getElementById('name').value;
+            const securityQuestion = document.getElementById('security-question').value;
+            const securityAnswer = document.getElementById('security-answer').value;
+            const errorMessage = document.getElementById('error-message');
+            const errorText = document.getElementById('error-text');
+            const submitButton = this.querySelector('.button');
+            
+            // Reset error display
+            errorMessage.style.display = 'none';
+            
+            // Validate name
+            if (nameInput.trim().length < 2) {
+                e.preventDefault();
+                errorText.textContent = 'Please enter a valid name (at least 2 characters)';
+                errorMessage.style.display = 'flex';
+                document.getElementById('name').focus();
+                return;
+            }
+            
+            // Validate email
+            if (!emailInput.toLowerCase().endsWith('@gmail.com')) {
+                e.preventDefault();
+                errorText.textContent = 'Please enter a valid Gmail address (e.g., example@gmail.com)';
+                errorMessage.style.display = 'flex';
+                document.getElementById('email').focus();
+                return;
+            }
+            
+            // Validate password
+            if (passwordInput.length < 6) {
+                e.preventDefault();
+                errorText.textContent = 'Password must be at least 6 characters long';
+                errorMessage.style.display = 'flex';
+                document.getElementById('password').focus();
+                return;
+            }
+            
+            // Validate security answer if question is selected
+            if (securityQuestion && securityAnswer.trim().length < 2) {
+                e.preventDefault();
+                errorText.textContent = 'Please provide a valid security answer';
+                errorMessage.style.display = 'flex';
+                document.getElementById('security-answer').focus();
+                return;
+            }
+            
+            // Add loading state
+            submitButton.classList.add('loading');
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
+        });
+    </script>
+</body>
 </html>

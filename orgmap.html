@@ -6,63 +6,143 @@
     <title>MapMate - Your Travel Planner</title>
     <link rel="stylesheet" href="orgstyle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
     <!-- Navigation Bar -->
     <div class="nav">
-    <div class="logo">
-        <img src="logo/logo.jpg" alt="#" height="60">
-        <div class="text">
-            <h1>Map Mate</h1>
-            <p>Your Travel Planner</p>
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-compass"></i>
+            </div>
+            <div class="text">
+                <h1>MapMate</h1>
+                <p>Intelligent Travel Planning</p>
+            </div>
+        </div>
+        <div class="nav-links">
+            <a href="mapmate.html" class="home-btn">
+                <i class="fas fa-home"></i> Home
+            </a>
         </div>
     </div>
-    <div class="nav-links">
-        <a href="mapmate.html" class="home-btn">Home</a>
-    </div>
-</div>
     
     <!-- Main Content -->
     <main>
         <div class="container">
-            <h1>Plan Your Journey</h1>
-            <p>Enter the number of destinations you want to visit and create your custom travel plan.</p>
+            <div class="hero-section">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        <i class="fas fa-route"></i>
+                        Plan Your Sophisticated Journey
+                    </h1>
+                    <p class="hero-subtitle">Configure your destinations and let our intelligent system craft the perfect itinerary with premium attractions, luxury accommodations, and exceptional dining experiences.</p>
+                </div>
+            </div>
             
             <div class="input-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-map-pin"></i> Journey Configuration</h2>
+                    <p>Specify your travel preferences and we'll create a bespoke itinerary tailored to your needs</p>
+                </div>
+
                 <div class="source-destination">
-                    <label for="source-city">Your Starting Point:</label>
-                    <input type="text" id="source-city" readonly class="source-highlight">
+                    <label for="source-city">
+                        <i class="fas fa-play-circle"></i>
+                        Departure Location
+                    </label>
+                    <div class="source-input-wrapper">
+                        <input type="text" id="source-city" readonly class="source-input">
+                        <div class="input-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="destination-count">
-                    <label for="num-destinations">Number of Destinations:</label>
-                    <input type="number" id="num-destinations" min="1" max="20" value="3">
-                    <button id="generate-btn">Generate Plan</button>
+                    <label for="num-destinations">
+                        <i class="fas fa-list-ol"></i>
+                        Number of Destinations
+                    </label>
+                    <div class="input-group">
+                        <input type="number" id="num-destinations" min="1" max="20" value="3">
+                        <button id="generate-btn" class="btn-primary">
+                            <i class="fas fa-cog"></i>
+                            Configure Plan
+                        </button>
+                    </div>
                 </div>
                 
                 <div id="destinations-container" class="destinations-container">
                     <!-- Destination inputs will be generated here -->
                 </div>
                 
-                <button id="create-map-btn" class="create-map-btn" >Create Map</button>
+                <button id="create-map-btn" class="create-map-btn">
+                    <i class="fas fa-paper-plane"></i>
+                    Create Journey
+                    <div class="btn-shine"></div>
+                </button>
             </div>
             
             <div class="map-container">
-                <div class="plane-icon">
-                    <i class="fas fa-plane"></i>
+                <div class="map-header">
+                    <div class="map-header-content">
+                        <div class="plane-icon">
+                            <i class="fas fa-compass"></i>
+                        </div>
+                        <h2>Your Curated Travel Experience</h2>
+                    </div>
                 </div>
                 <div id="map-display" class="map-display">
-                    <h2>Your Travel Map</h2>
                     <div id="map-content">
-                        <p class="map-placeholder">Your custom map will appear here after you enter your destinations.</p>
+                        <div class="map-placeholder">
+                            <div class="placeholder-icon">
+                                <i class="fas fa-map-marked-alt"></i>
+                            </div>
+                            <h3>Your Sophisticated Journey Awaits</h3>
+                            <p>Enter your destinations above and watch as we create your perfect travel experience with curated attractions, premium hotels, and exceptional restaurants!</p>
+                            <div class="placeholder-features">
+                                <div class="feature">
+                                    <i class="fas fa-gem"></i>
+                                    <span>Premium Places</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-camera"></i>
+                                    <span>Scenic Views</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-utensils"></i>
+                                    <span>Fine Dining</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-hotel"></i>
+                                    <span>Luxury Stays</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </main>
 
+    <!-- Download Trip Button -->
+    <div id="download-section" class="download-section" style="display: none;">
+        <button id="download-pdf-btn" class="download-pdf-btn">
+            <i class="fas fa-download"></i>
+            Download Trip PDF
+            <div class="btn-shine"></div>
+        </button>
+    </div>
+
     <footer>
-        <p>&copy; 2025 MapMate Travel Planner. All rights reserved.</p>
+        <div class="footer-content">
+            <div class="footer-icon">
+                <i class="fas fa-heart"></i>
+            </div>
+            <p>&copy; 2025 MapMate Travel Planner. Crafted with passion for discerning travelers.</p>
+        </div>
     </footer>
 
     <script src="orgscript.js"></script>
